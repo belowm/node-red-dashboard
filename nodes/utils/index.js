@@ -91,9 +91,11 @@ function getThirdPartyWidgets (directory) {
     const getWidgets = (packageJson) => {
         if (packageJson?.['node-red-dashboard-2']) {
             // loop over object of widgets & add to contribs object
+            const packageName = packageJson['node-red-dashboard-2']['package-name'];
             Object.entries(packageJson['node-red-dashboard-2'].widgets).forEach(([widgetName, widgetConfig]) => {
                 contribs[widgetName] = {
                     package: packageJson.name,
+                    packageName: packageName || widgetName,
                     name: widgetName,
                     src: widgetConfig.output,
                     path: path.resolve(directory),
